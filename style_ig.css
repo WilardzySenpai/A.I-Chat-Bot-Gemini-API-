@@ -1,0 +1,133 @@
+/* General Styling */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 20px;
+    background-color: #121212;
+    color: #f0f0f0;
+  }
+  
+  #chat-container {
+    background-color: 0000;
+    width: 350px; /* Reduced width for a more vertical look */
+    height: 90%; /* Set a fixed height */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    margin: 0 auto;
+  }
+
+  #chat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    /* border-bottom: 1px solid #333; */
+  }
+  
+  #bot-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  #bot-info > div { /* Target the div containing name and status */
+    margin-left: 10px; /* Add margin to the right */
+    display: flex;
+    flex-direction: column;
+  }
+
+  #bot-info img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+  }
+
+  #bot-name {
+    font-weight: bold;
+  }
+
+  #bot-status {
+    font-size: smaller;
+    color: #3E3E3E;
+  }
+
+  #contact-icons i {
+    margin-left: 10px;
+    margin-right: 20px;
+    font-size: 20px;
+    cursor: pointer;
+    color: #A30DEB;
+  }
+  
+  /* Chat History */
+  #chat-history {
+    height: calc(100% - 90px); /* Take up full height minus input area */
+    overflow-y: scroll;
+    padding: 15px;
+    background-color: #000;
+
+    /* Hide scrollbar for Chrome, Safari, and Opera */
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  
+    /* Hide scrollbar for IE, Edge, and Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  
+  .user-message, .chatbot-message {
+    margin: 10px 0;
+    padding: 12px 15px;
+    border-radius: 20px;
+    clear: both; /* Prevent messages from overlapping */
+  }
+  
+  .user-message {
+    background-color: #3C5CED; /* Messenger user message color */
+    color: #fff;
+    float: right; /* Align user messages to the right */
+  }
+
+  .bot-message-wrapper {
+    display: flex;
+  }
+  
+  .chatbot-message {
+    background-color: #2F2F2F; /* Messenger chatbot message color */
+    color: #eee;
+    margin-left: 40px;
+  }
+
+  .bot-message-image {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+  }
+
+  /* Chat Input */
+  #chat-input {
+    border-end-end-radius: 10px;
+    border-end-start-radius: 10px;
+    background-color: 000;
+    display: flex;
+    padding: 10px;
+    /* border-top: 1px solid #333;  */
+  }
+  
+  #messageBox {
+    flex-grow: 1;
+    padding: 10px;
+    border: none; /* Remove border */
+    border-radius: 20px;
+    background-color: #343434;
+    color: #fff;
+  }
+  
+  #sendButton {
+    padding: 10px 15px;
+    background-color: #A30DEB;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-left: 10px;
+  }

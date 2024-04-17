@@ -1,0 +1,100 @@
+<html>
+
+<head>
+    <title>CHAT BOT (MULTI)</title>
+    <link rel="stylesheet" href="style_ig.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+    <div id="chat-container">
+        <div id="chat-header">
+            <div id="bot-info">
+                <img src="bot_pfp.png" alt="Bot Profile Picture">
+                <div id="div_bot">
+                    <span id="bot-name">The One</span>
+                    <span id="bot-status">Active Awalys</span>
+                </div>
+            </div>
+            <div id="contact-icons">
+                <i class="fa-solid fa-phone"></i>
+                <i class="fa-solid fa-video"></i>
+                <i class="fa-solid fa-circle-info"></i>
+
+            </div>
+        </div>
+        <div id="chat-history">
+        </div>
+        <div id="chat-input">
+            <input type="text" id="messageBox" placeholder="Enter message">
+            <button id="sendButton">
+                <i class="fa-solid fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+    <script type="importmap">
+      {
+        "imports": {
+          "@google/generative-ai": "https://esm.run/@google/generative-ai"
+        }
+      }
+    </script>
+    <script type="module">
+        import { GoogleGenerativeAI } from "@google/generative-ai";
+
+        // Fetch your API_KEY
+        const API_KEY = "GEMINI_API";
+
+        const genAI = new GoogleGenerativeAI(API_KEY);
+
+        const model = genAI.getGenerativeModel({ model: "MODEL_NAME" });
+        const chat = await model.startChat();
+
+        async function sendMessageToChat(userMessage) {
+            const result = await chat.sendMessage(userMessage);
+            // const text = response.text();
+            // Assuming the text response is in a property called 'text'
+            const response = await result.response;
+            const responseText = response.text();  // Or response['text']
+            displayMessage(responseText, false);
+        }
+
+        function displayMessage(message, isUser) {
+            const chatHistory = document.getElementById("chat-history");
+            const messageElement = document.createElement("div");
+            messageElement.className = isUser ? "user-message" : "chatbot-message";
+            messageElement.textContent = message;
+
+            if (!isUser) { // If it's a chatbot message
+                const wrapperElement = document.createElement("div"); // Create a wrapper
+                wrapperElement.className = "bot-message-wrapper";
+
+                const imageElement = document.createElement("img");
+                imageElement.src = "./bot_pfp.png";
+                imageElement.alt = "Bot Image";
+                imageElement.className = "bot-message-image";
+                chatHistory.appendChild(imageElement); // Append image to chatHistory
+
+                wrapperElement.appendChild(imageElement);  // Add image to wrapper FIRST
+                wrapperElement.appendChild(messageElement); // Add message to wrapper SECOND
+                chatHistory.appendChild(wrapperElement);
+            }
+
+            chatHistory.appendChild(messageElement);
+            chatHistory.scrollTop = chatHistory.scrollHeight;
+        }
+
+        document.getElementById("sendButton").addEventListener("click", () => {
+            const userMessage = document.getElementById("messageBox").value;
+            // Display user's message
+            displayMessage(userMessage, true); // true indicates it's a user message
+
+            // Clear the input field
+            document.getElementById("messageBox").value = "";
+
+            sendMessageToChat(userMessage);
+        });
+    </script>
+</body>
+
+</html>
